@@ -161,7 +161,51 @@ ON REPLACE(REPLACE(REPLACE(REPLACE(order_details.pizza_id, '_s', ''), '_m', ''),
 
 Insight: Har order ke saath pizza ka naam aur uske ingredients.
 
-# Project Outcome
-Identified customer preferences and high-performing pizza categories.
-Derived actionable insights for inventory planning and revenue optimization.
-Created time-based sales trends and cumulative revenue patterns.
+# 16. Total Quantity of Each Pizza Type Ordered by Date and Size
+
+SELECT pizza_types.name, orders.date, pizzas.size, SUM(order_details.quantity) AS total_quantity
+FROM pizza_types 
+JOIN pizzas ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+JOIN order_details ON pizzas.pizza_id = order_details.pizza_id
+JOIN orders ON order_details.order_id = orders.order_id
+GROUP BY pizza_types.name, orders.date, pizzas.size;
+
+Insight: This query helps identify how many pizzas of each type, size, and date were ordered.
+
+Use Case:
+To analyze sales trends over time.
+To determine which pizza size is most popular on specific dates.
+To assist in inventory management and demand forecasting.
+
+# Project Outcome & Insights from Queries
+This project focuses on pizza sales data analysis using SQL queries to extract meaningful business insights. 
+The queries were designed to analyze sales performance, customer preferences, revenue distribution, and operational trends. Based on these queries, we can derive the following key outcomes:
+
+1. Sales Performance & Revenue Insights
+Total number of orders and total revenue help evaluate overall business performance.
+Identifying top revenue-generating pizzas allows businesses to optimize their menu pricing and promotions.
+Cumulative revenue trends over time reveal seasonal demand patterns.
+Revenue contribution by pizza category helps in deciding category-wise pricing and marketing strategies.
+
+2. Customer Preferences & Demand Analysis
+Understanding the most popular pizza sizes helps in inventory and supply chain management.
+Analyzing top-ordered pizzas and categories reveals customer preferences, which can guide promotional campaigns.
+Top-selling pizzas in each category highlight the best-performing items in different segments (e.g., Veg, Non-Veg).
+
+3. Time-Based Sales Trends
+Hourly order distribution helps identify peak business hours for better staffing and operations management.
+Daily pizza sales trends enable businesses to plan marketing offers or discounts for slow days.
+
+4. Inventory & Supply Chain Optimization
+Analyzing total quantity ordered per pizza type and size helps optimize stock levels.
+Ingredient-based analysis of pizzas in each order ensures efficient procurement of raw materials.
+
+5. Data-Driven Decision Making
+Insights from order trends help businesses forecast demand and reduce food waste.
+Understanding which pizza sizes and types perform best on specific dates allows for better promotional event planning.
+
+# Future Scope Based on These Insights
+Implement dynamic pricing based on demand trends.
+Improve customer retention strategies by offering personalized promotions based on popular pizza types.
+Optimize staffing and delivery logistics by aligning resources with peak order timings.
+These queries provide a holistic view of pizza sales data, allowing businesses to make data-driven decisions for growth and efficiency.
